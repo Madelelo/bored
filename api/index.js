@@ -11,6 +11,7 @@ const cors = require("cors");
 app.use(
   cors({
     methods: ["GET"], // Only allow GET requests
+    origin: false,
   })
 );
 
