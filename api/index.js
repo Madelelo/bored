@@ -10,8 +10,8 @@ const activities = require("./activities.json");
 const cors = require("cors");
 app.use(
   cors({
-    methods: ["GET"], // Only allow GET requests
-    origin: false,
+    origin: "*", // ✅ Allows all origins
+    methods: ["GET"], // ✅ Allows only GET requests
   })
 );
 
