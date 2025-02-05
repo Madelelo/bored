@@ -6,8 +6,13 @@ app.use(express.json());
 //Import activities from JSON
 const activities = require("./activities.json");
 
+// Allow all origins for GET requests
 const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    methods: ["GET"], // Only allow GET requests
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello you!");
