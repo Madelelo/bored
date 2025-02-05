@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bored?</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bored-header">
+      <h1>Are you bored?</h1>
+      <button id="generate-activity" onclick="generateActivity()">
+        Click for random activity
+      </button>
+      <h2 id="activity">Activity</h2>
+      <div class="activity-card">
+        <div class="activity-info">
+          <p>Type:</p>
+          <p id="type"></p>
+        </div>
+        <div class="activity-info">
+          <p>Accessability:</p>
+          <p id="accessability"></p>
+        </div>
+        <div class="activity-info">
+          <p>Costlyness:</p>
+          <p id="price"></p>
+        </div>
+        <div class="activity-info">
+          <p>Participants:</p>
+          <p id="participants"></p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        class="activity-type"
+        onclick="generateActivityByType('education')"
+      >
+        Educational
+      </button>
+      <button
+        class="activity-type"
+        onclick="generateActivityByType('recreational')"
+      >
+        Recreational
+      </button>
+      <button class="activity-type" onclick="generateActivityByType('social')">
+        Social
+      </button>
+      <button class="activity-type" onclick="generateActivityByType('charity')">
+        Charity
+      </button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
