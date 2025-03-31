@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const fs = require("fs");
 app.use(express.json());
 
 //Import activities from JSON
-const activities = require("./activities.json");
+let activities = require("./activities.json");
 
 // Allow all origins for GET requests
 const cors = require("cors");
@@ -16,7 +17,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send("Hello you!");
+  res.send("Hello youjj!");
 });
 
 //Endpoint for getting random activity
@@ -42,6 +43,51 @@ app.get("/api/activity", (req, res) => {
   );
 
   res.send(activitiesByType[randomActivityIndex]);
+});
+
+// Endpoint for adding a new activity
+app.post("/api/activity", (req, res) => {
+  const newActivity = req.body;
+
+  // // Validate the new activity
+  // if (
+  //   !newActivity.activity ||
+  //   !newActivity.type ||
+  //   typeof newActivity.participants !== "number" ||
+  //   typeof newActivity.price !== "number" ||
+  //   !newActivity.link ||
+  //   !newActivity.key ||
+  //   typeof newActivity.accessibility !== "number"
+  // ) {
+  //   return res.status(400).send({ error: "Invalid activity data." });
+  // }
+
+  // Check for duplicate key
+  const existingActivity = activities.find(
+    (activity) => activity.key === newActivity.key
+  );
+  if (existingActivity) {
+    return res
+      .status(409)
+      .send({ error: "Activity with this key already exists." });
+  }
+
+  // Add the new activity
+  activities.push(newActivity);
+
+  // Write the updated activities array back to the JSON file
+  fs.writeFile(
+    "./activities.json",
+    JSON.stringify(activities, null, 2),
+    (err) => {
+      if (err) {
+        return res
+          .status(500)
+          .send({ error: "Failed to save the new activity." });
+      }
+      res.status(201).send(newActivity);
+    }
+  );
 });
 
 app.listen(port, () => {
