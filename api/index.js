@@ -27,7 +27,7 @@ app.get("/api/randomactivity", (req, res) => {
   res.send(activities[randomActivityIndex]);
 });
 
-//Endpoint for getting a random activity by type /api/activity?type=:type
+//Endpoint for getting a random activity by type /api/activity?type={type}
 app.get("/api/activity", (req, res) => {
   let type = req.query.type;
 
@@ -45,22 +45,27 @@ app.get("/api/activity", (req, res) => {
   res.send(activitiesByType[randomActivityIndex]);
 });
 
+//Endpoint for 10 activities in a list /api/activities
+app.get("/api/activities", (req, res) => {
+  res.send("Coming soon");
+});
+
 // Endpoint for adding a new activity
 app.post("/api/activity", (req, res) => {
   const newActivity = req.body;
 
   // // Validate the new activity
-  // if (
-  //   !newActivity.activity ||
-  //   !newActivity.type ||
-  //   typeof newActivity.participants !== "number" ||
-  //   typeof newActivity.price !== "number" ||
-  //   !newActivity.link ||
-  //   !newActivity.key ||
-  //   typeof newActivity.accessibility !== "number"
-  // ) {
-  //   return res.status(400).send({ error: "Invalid activity data." });
-  // }
+  if (
+    !newActivity.activity ||
+    !newActivity.type ||
+    typeof newActivity.participants !== "number" ||
+    typeof newActivity.price !== "number" ||
+    !newActivity.link ||
+    !newActivity.key ||
+    typeof newActivity.accessibility !== "number"
+  ) {
+    return res.status(400).send({ error: "Invalid activity data." });
+  }
 
   // Check for duplicate key
   const existingActivity = activities.find(
