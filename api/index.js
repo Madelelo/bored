@@ -3,21 +3,23 @@ const app = express();
 const port = 3000;
 const fs = require("fs");
 app.use(express.json());
+const path = require("path");
 
 //Import activities from JSON
 let activities = require("./activities.json");
 
-// Allow all origins for GET requests
+// Allow all origins for GET and POST requests
 const cors = require("cors");
 app.use(
   cors({
-    origin: "*", // ✅ Allows all origins
-    methods: ["GET"], // ✅ Allows only GET requests
+    origin: "*", // Allows all origins
+    methods: ["GET, POST"], // Allows only GET requests
   })
 );
 
+//Homepage with dokumentation
 app.get("/", (req, res) => {
-  res.send("Hello youjj!");
+  res.sendFile(path.join(__dirname, "/index.html"));
 });
 
 //Endpoint for getting random activity
