@@ -22,6 +22,13 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/index.html"));
 });
 
+//Homepage endpoint
+app.get("/api", (req, res) => {
+  res.send(
+    "Welcome to the Bored API. See documentation at https://bored-backend.vercel.app/ for more information."
+  );
+});
+
 //Endpoint for getting random activity
 app.get("/api/randomactivity", (req, res) => {
   let randomActivityIndex = Math.floor(Math.random() * activities.length + 1);
