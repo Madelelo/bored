@@ -1,5 +1,5 @@
 const APIURL = "http://localhost:3000/api/";
-const APIURL_LIVE = "http://bored-backend.vercel.app/api";
+const APIURL_LIVE = "https://bored-backend.vercel.app/";
 
 async function generateActivity() {
   const response = await fetch(APIURL_LIVE + "/api/randomactivity"); // Henter fra APIURL_LIVE
